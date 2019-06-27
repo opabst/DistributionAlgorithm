@@ -17,8 +17,6 @@ import java.util.ArrayList;
  *
  */
 
-// TODO: 2 algorithm phases (1. run over inputList and assign to matching buckets, as long as they have remaining capacity. 2. distribute the remaining entries over the buckets honoring the capacity)
-
 public class DistributionAlgorithm<E> {
 
     private Bucket<E> buckets;
@@ -48,6 +46,12 @@ public class DistributionAlgorithm<E> {
         CapacityCalculator cc = new CapacityCalculator(weights, inputList.size());
 
         bucketCaps = cc.getCapacityCalculation();
+
+        // TODO: implement the assignment phase
+
+        // TODO: first run: assign using groups, but respecting the calculated capacities
+
+        // TODO: second run: assign the remaining entities
 
     }
 
