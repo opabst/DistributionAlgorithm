@@ -2,7 +2,9 @@ import de.oliverpabst.distribution_algorithm.model.Bucket;
 import de.oliverpabst.distribution_algorithm.model.BucketEntry;
 import de.oliverpabst.distribution_algorithm.algorithm.CapacityCalculator;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Input: - list of bucket entries (each assigned to one or none bucket)
@@ -49,7 +51,7 @@ public class DistributionAlgorithm<E> {
 
         // First run: assign entries with a key > 0 and as long as the buckets cap is not exceeded
         for(BucketEntry e: inputList) {
-            if(e.getKey() > 0) {
+            if(e.getKey() > -1) {
                 // Bucket as remaining space => add entry to the bucket
                 if (buckets.getBucket(e.getKey()).size() < bucketCaps.get(e.getKey())) {
                     buckets.getBucket(e.getKey()).add(e);
@@ -63,12 +65,31 @@ public class DistributionAlgorithm<E> {
         }
 
         // Second run: distribute remaining items on the buckets with available space
+
+        int currentBucket = 0;
+        boolean matchFound = false;
         for(BucketEntry e: remainingEntries) {
-            for(int i = 0; i < bucketCnt; i++) {
-                while(buckets.getBucket(i).size() < bucketCaps.get(i)) {
-                    buckets.getBucket(i).add(e);
+            matchFound = false;
+
+            while(!matchFound) {
+                if (buckets.getBucket(currentBucket).size() < bucketCaps.get(currentBucket)) {
+                    buckets.getBucket(currentBucket).add(e);
+                    matchFound = true;
+                } else {
+                    currentBucket++;
                 }
             }
         }
+    }
+
+    public HashMap<Integer, ArrayList<BucketEntry<E>>> getResultMapping() {
+        HashMap<Integer, ArrayList<BucketEntry<E>>> resultMap = new HashMap<>();
+        for(int i = 0; i < bucketCnt; i++) {
+            resultMap.put(i, new ArrayList<>());
+            for(int j = 0; j < buckets.getBucket(i).size(); j++) {
+                resultMap.get(i).add(buckets.getBucket(i).get(j));
+            }
+        }
+        return resultMap;
     }
 }

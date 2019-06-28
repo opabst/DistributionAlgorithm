@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Buckets are represented by array lists in an super array list.
- * Basic assumption: buckets will be numerated from 1 to bucketSize.
+ * Basic assumption: buckets will be numerated from 1 to bucketSize. TODO: rething numbering
  * Remember counting in array lists starts at zero. E.g. bucket 3 is stored at position 2
  * in the super list.
  */
