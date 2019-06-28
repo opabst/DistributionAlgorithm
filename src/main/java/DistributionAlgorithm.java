@@ -27,8 +27,6 @@ public class DistributionAlgorithm<E> {
 
     private ArrayList<Integer> weights;
 
-    private Integer distributionAverage;
-
     private ArrayList<Integer> bucketCaps;
 
     public DistributionAlgorithm(Integer _bucketCnt, ArrayList<BucketEntry<E>> _entryList, ArrayList<Integer> _bucketWeights) throws Exception {
@@ -47,16 +45,30 @@ public class DistributionAlgorithm<E> {
 
         bucketCaps = cc.getCapacityCalculation();
 
-        // TODO: implement the assignment phase
+        ArrayList<BucketEntry<E>> remainingEntries = new ArrayList<>();
 
-        // TODO: first run: assign using groups, but respecting the calculated capacities
+        // First run: assign entries with a key > 0 and as long as the buckets cap is not exceeded
+        for(BucketEntry e: inputList) {
+            if(e.getKey() > 0) {
+                // Bucket as remaining space => add entry to the bucket
+                if (buckets.getBucket(e.getKey()).size() < bucketCaps.get(e.getKey())) {
+                    buckets.getBucket(e.getKey()).add(e);
+                } else {
+                    // Buckets capacity is exceeded => add to remaning entry list for later allocation
+                    remainingEntries.add(e);
+                }
+            } else {
+                remainingEntries.add(e);
+            }
+        }
 
-        // TODO: second run: assign the remaining entities
-
+        // Second run: distribute remaining items on the buckets with available space
+        for(BucketEntry e: remainingEntries) {
+            for(int i = 0; i < bucketCnt; i++) {
+                while(buckets.getBucket(i).size() < bucketCaps.get(i)) {
+                    buckets.getBucket(i).add(e);
+                }
+            }
+        }
     }
-
-
-
-
-
 }

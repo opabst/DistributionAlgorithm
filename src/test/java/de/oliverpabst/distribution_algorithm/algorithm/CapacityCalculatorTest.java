@@ -1,4 +1,4 @@
-package de.oliverpabst.distribution_algorithm.model.algorithm;
+package de.oliverpabst.distribution_algorithm.algorithm;
 
 import org.junit.Test;
 
