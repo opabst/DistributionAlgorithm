@@ -1,6 +1,6 @@
 import de.oliverpabst.distribution_algorithm.model.Bucket;
 import de.oliverpabst.distribution_algorithm.model.BucketEntry;
-import de.oliverpabst.distribution_algorithm.model.algorithm.CapacityCalculator;
+import de.oliverpabst.distribution_algorithm.algorithm.CapacityCalculator;
 
 import java.util.ArrayList;
 
