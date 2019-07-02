@@ -2,7 +2,6 @@ import de.oliverpabst.distribution_algorithm.model.Bucket;
 import de.oliverpabst.distribution_algorithm.model.BucketEntry;
 import de.oliverpabst.distribution_algorithm.algorithm.CapacityCalculator;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -49,7 +48,8 @@ public class DistributionAlgorithm<E> {
 
         ArrayList<BucketEntry<E>> remainingEntries = new ArrayList<>();
 
-        // First run: assign entries with a key > 0 and as long as the buckets cap is not exceeded
+        // First run: assign entries with a key >= 0 and as long as the buckets cap is not exceeded
+        //     -> buckets without a assigned group key have the key -1
         for(BucketEntry e: inputList) {
             if(e.getKey() > -1) {
                 // Bucket as remaining space => add entry to the bucket
