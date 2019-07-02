@@ -39,9 +39,39 @@ public class DistributionAlgorithmTest {
             e.printStackTrace();
         }
 
+        assert da != null;
         HashMap<Integer, ArrayList<BucketEntry<String>>> result = da.getResultMapping();
 
-        // TODO: evaluate mapping
+        // Mapping evaluation
+
+        // buckets run from 0 to 2
+        ArrayList<BucketEntry<String>> bucket0 = result.get(0);
+        assertEquals(bucket0.get(0).getValue(), "Entry 2");
+        assertEquals(bucket0.get(1).getValue(), "Entry 4");
+        assertEquals(bucket0.get(2).getValue(), "Entry 6");
+
+        ArrayList<BucketEntry<String>> bucket1 = result.get(1);
+        assertEquals(bucket1.get(0).getValue(), "Entry 5");
+        assertEquals(bucket1.get(1).getValue(), "Entry 1");
+
+        ArrayList<BucketEntry<String>> bucket2 = result.get(2);
+        assertEquals(bucket2.get(0).getValue(), "Entry 3");
+        assertEquals(bucket2.get(1).getValue(), "Entry 7");
     }
 
+
+    @Test(expected = Exception.class)
+    public void sizeMismatchTest() throws Exception {
+        int bucketCount = 5;
+        ArrayList<Integer> weights = new ArrayList<>();
+        weights.add(1);
+        weights.add(1);
+        weights.add(2);
+        weights.add(1);
+        ArrayList<BucketEntry<String>> entries = new ArrayList<>();
+        BucketEntry<String> e1 = new BucketEntry<>(0, "Entry");
+        entries.add(e1);
+
+        DistributionAlgorithm<String> da = new DistributionAlgorithm<>(bucketCount, entries, weights);
+    }
 }
