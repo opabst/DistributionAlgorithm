@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 /**
  * Buckets are represented by array lists in an super array list.
- * Basic assumption: buckets will be numerated from 0 to bucketSize-1.
+ * Basic assumption: buckets will be numerated from 0 to bucketSize-1, while the position in the arraylist
+ * represents the buckets group id.
  */
 
-public class Bucket<E> {
+public class Buckets<E> {
     private ArrayList<ArrayList> superList = new ArrayList<>();
 
-    public Bucket(int _bucketSize) {
+    public Buckets(int _bucketSize) {
         for(int i = 0; i < _bucketSize; i++) {
              superList.add(new ArrayList<BucketEntry<E>>());
         }

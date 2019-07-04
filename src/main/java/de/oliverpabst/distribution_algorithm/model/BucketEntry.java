@@ -1,8 +1,8 @@
 package de.oliverpabst.distribution_algorithm.model;
 
 /**
- * Entry for a bucket. Note that the key is not necessarily a unique key; instead it determines the group affiliation.
- * -1 stands for no group, groups start from 0 on.
+ * This class represents entries for buckets. Note that the key is not necessarily a unique key; instead it determines
+ * the group affiliation. -1 stands for no group, groups start from 0 on.
  */
 
 public class BucketEntry<E> {

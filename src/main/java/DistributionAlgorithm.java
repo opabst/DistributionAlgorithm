@@ -1,4 +1,4 @@
-import de.oliverpabst.distribution_algorithm.model.Bucket;
+import de.oliverpabst.distribution_algorithm.model.Buckets;
 import de.oliverpabst.distribution_algorithm.model.BucketEntry;
 import de.oliverpabst.distribution_algorithm.algorithm.CapacityCalculator;
 
@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 public class DistributionAlgorithm<E> {
 
-    private Bucket<E> buckets;
+    private Buckets<E> buckets;
 
     private Integer bucketCnt;
 
@@ -32,7 +32,7 @@ public class DistributionAlgorithm<E> {
 
     public DistributionAlgorithm(Integer _bucketCnt, ArrayList<BucketEntry<E>> _entryList, ArrayList<Integer> _bucketWeights) throws Exception {
         bucketCnt = _bucketCnt;
-        buckets = new Bucket<>(bucketCnt);
+        buckets = new Buckets<>(bucketCnt);
 
         inputList = _entryList;
 
@@ -52,11 +52,11 @@ public class DistributionAlgorithm<E> {
         //     -> buckets without a assigned group key have the key -1
         for(BucketEntry e: inputList) {
             if(e.getKey() > -1) {
-                // Bucket as remaining space => add entry to the bucket
+                // Bucket has remaining space => add entry to the bucket
                 if (buckets.getBucket(e.getKey()).size() < bucketCaps.get(e.getKey())) {
                     buckets.getBucket(e.getKey()).add(e);
                 } else {
-                    // Buckets capacity is exceeded => add to remaning entry list for later allocation
+                    // Buckets capacity is exceeded => add to the list with remaining entires for later bucket allocation
                     remainingEntries.add(e);
                 }
             } else {
@@ -64,8 +64,7 @@ public class DistributionAlgorithm<E> {
             }
         }
 
-        // Second run: distribute remaining items on the buckets with available space
-
+        // Second run: distribute remaining items on the buckets that have available space
         int currentBucket = 0;
         boolean matchFound = false;
         for(BucketEntry e: remainingEntries) {
@@ -76,6 +75,7 @@ public class DistributionAlgorithm<E> {
                     buckets.getBucket(currentBucket).add(e);
                     matchFound = true;
                 } else {
+                    // The current buckets capacity exceeded; continue with the next bucket
                     currentBucket++;
                 }
             }

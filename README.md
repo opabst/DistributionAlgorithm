@@ -7,8 +7,8 @@ Algorithm to equally distribute a set of entities (with or without group keys) t
 
 # Algorithm task
 - distribute the entities equally across the buckets (representing groups) while honoring
-- allocate entities to the corresponding bucket first
-  - only allocate entities to other buckets if the corresponding bucket is filled
+- allocate entities to the corresponding buckets first
+  - only allocate entities to other buckets if the corresponding buckets is filled
   
 # Output
 - a set of buckets, that contain the assigned entities 

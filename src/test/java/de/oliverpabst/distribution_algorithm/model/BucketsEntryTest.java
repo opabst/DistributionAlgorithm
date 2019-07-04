@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class BucketEntryTest {
+public class BucketsEntryTest {
     public BucketEntry<Integer> createIntBucket() {
         BucketEntry<Integer> be = new BucketEntry<>(1, 234);
         return be;

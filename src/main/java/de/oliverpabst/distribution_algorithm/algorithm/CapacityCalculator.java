@@ -2,8 +2,11 @@ package de.oliverpabst.distribution_algorithm.algorithm;
 
 import java.util.ArrayList;
 
-// Distribute by weight
-// Redistribute the remainder that has not been distributed.
+/**
+ * This class takes the individual group weights (weights can only be integers!) and the size of the input data to
+ * calculate the capacity that each bucket will have. The input will be equally distributed with a maximum difference
+ * capacity-wise across the buckets of 1.
+ */
 
 public class CapacityCalculator {
 
