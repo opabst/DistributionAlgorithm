@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * Output: a set of buckets, where the entries are equally distributed, honoring the weights and group affiliations
  *
- * Explanation: - entries should preferably be assigned to the groups of a bucket
+ * Explanation: - entries should preferably be assigned to the group of a bucket
  *              - only assign entries to other buckets if the groups bucket is full
  *
  *
